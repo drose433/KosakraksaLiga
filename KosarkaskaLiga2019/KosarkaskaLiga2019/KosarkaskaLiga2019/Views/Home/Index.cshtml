@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container" style="font-family: 'Pacifico', cursive;background:url(/images/cover.jpg);background-size: cover;height:500px;padding:0px;-webkit-box-shadow: inset 47px -162px 300px -90px rgba(0,0,0,0.75);-moz-box-shadow: inset 47px -162px 300px -90px rgba(0,0,0,0.75);box-shadow: inset 47px -162px 300px -90px rgba(0,0,0,0.75);">
+    <div class="poz">
+
+    </div>
+</div>
+<div class="container" style="padding-left:0px;padding-right:0px;">
+    <div class="tekst">
+        <h1>Vice City Summer League</h1>
+        <p>Letnji turnir na zamisljen kao priprema NBA klubovima za sezonu.</p>
+    </div>
+</div>
+<div class="container mt-3">
+    <div class="row">
+        <div></div>
+        <form id="form1" asp-controller="Tim" asp-action="Index"></form>
+        <div id="prva" class="col-md-3 pl-5 pr-5 klik" style="text-align:center;border-bottom: 15px solid #87348c;border-top: 15px solid #5c84ec;" onclick="Vodi1()">
+            <i class="fas fa-basketball-ball fa-10x mt-3" style="color:#87348c"></i>
+            <h2 href="/Utakmica/Index" class="mt-2" style="color:#5c84ec;font-family: 'Lobster', cursive;">Raspored utakmica</h2>
+        </div>
+        <form id="form2" asp-controller="Utakmica" asp-action="Index"></form>
+        <div class="col-md-1"></div>
+        <div class="col-md-3 pl-5 pr-5 klik" style="text-align:center;border-bottom: 15px solid #87348c;border-top: 15px solid #5c84ec;" onclick="Vodi2()">
+            <i class="fas fa-table fa-10x mt-3" style="color:#87348c"></i>
+            <h1 class="mt-2" style="color:#5c84ec;font-family: 'Lobster', cursive;">Tabela</h1>
+        </div>
+        <form id="form3" asp-controller="Home" asp-action="VideoArhiva"></form>
+        <div class="col-md-1"></div>
+        <div class="col-md-3 pl-5 pr-5 klik" style="text-align:center;border-bottom: 15px solid #87348c;border-top: 15px solid #5c84ec;" onclick="Vodi3()">
+            <i class="fas fa-tv fa-10x mt-3" style="color:#87348c"></i>
+            <h2 class="mt-2" style="color:#5c84ec;font-family: 'Lobster', cursive;">Video arhiva</h2>
+
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/css/style.css" />
+}
+@section Scripts{
+    <script>
+        function Vodi1() {
+            $("#form1").submit();
+        }
+        function Vodi2() {
+            $("#form2").submit();
+        }
+        function Vodi3() {
+            $("#form3").submit();
+        }
+
+    </script>
+}

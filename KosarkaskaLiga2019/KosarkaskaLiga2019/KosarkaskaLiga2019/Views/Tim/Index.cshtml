@@ -1,0 +1,76 @@
+﻿@model IEnumerable<KosarkaskaLiga2019.Models.Tim>
+@inject SignInManager<ApplicationUser> sm
+@inject UserManager<ApplicationUser> um
+@{
+    ViewData["Title"] = "Index";
+    var korisnik = await um.GetUserAsync(User);
+}
+
+<h1 style="font-family: 'Lobster', cursive;">Tabela učesnika</h1>
+@if (sm.IsSignedIn(User) && korisnik.Email == "admin@gmail.com")
+{
+    <p>
+        <a asp-action="Create" >Kreirajte novi tim</a>
+    </p>
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <form class="form" id="form1" data-ajax="true" data-ajax-update="#div1">
+            <div class="form-group">
+                <label for="Text1">Unesite tim</label>
+                <input id="Text1" name="naziv" type="text" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="Text2">Odaberite grad</label>
+                <select id="Select1" name="id" class="form-control" asp-items="ViewBag.Gradovi">
+                    <option value="0">Svi timovi</option>
+                </select>
+            </div>
+            <input type="button" name="name" value="Pretrazi" class="btn btn-block" style="background-image: linear-gradient(to right,#532b67,#b250b7);color:white;" onclick="Pronadji()" />
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12" id="div1">
+        <partial name="_TraziTimove" />
+    </div>
+</div>
+@section Styles{
+    <script src="~/lib/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+    <style>
+
+        div.slika {
+            width: 230px;
+            border-radius: 5px;
+            border: 1px solid red;
+            padding: 10px;
+            float: left;
+            margin: 10px;
+        }
+
+            div.slika img {
+                width: 200px;
+                height: 150px;
+                margin-bottom: 10px;
+            }
+    </style>
+    <script>
+        function Pronadji() {
+            var podaci = $("#form1").serialize();
+
+            var zahtev = $.ajax({
+                type: "GET",
+                url: "/Tim/_TraziTimove",
+                data: podaci,
+                dataType: "html"
+            });
+
+            zahtev.done(function (htmlString) {
+                $("#div1").html(htmlString);
+            });
+        }
+        $(function () { Pronadji(); });
+    </script>
+}
+

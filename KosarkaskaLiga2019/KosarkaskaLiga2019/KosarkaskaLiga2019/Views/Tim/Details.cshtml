@@ -1,0 +1,40 @@
+﻿@model KosarkaskaLiga2019.Models.Tim
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1 style="font-family: 'Lobster', cursive;">Detlaji o timu</h1>
+
+<div>
+    <h4>Tim</h4>
+    <hr />
+    <img src="/Tim/CitajSliku/@Model.TimId" style="height:200px" />
+    <dl class="row mt-5">
+
+        <dt class="col-sm-2">
+            Naziv
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Naziv
+        </dd>
+
+
+        <dt class="col-sm-2">
+            Grad
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Grad.NazivGrada
+        </dd>
+        <dt class="col-sm-2">
+            BrojBodova
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BrojBodova
+        </dd>
+    </dl>
+</div>
+<div>
+    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.TimId">Pomeni detalje tima</a>
+    <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Index">Nazad na tabelu</a>
+</div>

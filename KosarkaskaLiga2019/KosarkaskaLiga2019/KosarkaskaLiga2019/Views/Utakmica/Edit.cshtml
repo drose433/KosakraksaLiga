@@ -1,0 +1,57 @@
+﻿@model KosarkaskaLiga2019.Models.Utakmica
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@if (Model.Rezultat == null)
+{
+
+
+<h1 style="font-family: 'Lobster', cursive;">Promenite detalje utakmica</h1>
+
+<h4>Utakmica</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UtakmicaId" />
+            <div class="form-group">
+                <label asp-for="DomacinId" class="control-label"></label>
+                <select asp-for="DomacinId" class="form-control" asp-items="ViewBag.DomacinId"></select>
+                <span asp-validation-for="DomacinId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GostId" class="control-label"></label>
+                <select asp-for="GostId" class="form-control" asp-items="ViewBag.GostId"></select>
+                <span asp-validation-for="GostId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Kolo" class="control-label"></label>
+                <input asp-for="Kolo" class="form-control" />
+                <span asp-validation-for="Kolo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rezultat" class="control-label"></label>
+                <input asp-for="Rezultat" class="form-control" placeholder="Rezultat uneti u formatu 111:110" />
+                <span asp-validation-for="Rezultat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Sacuvaj promene" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Index">Nazad na listu utakmica</a>
+</div>
+}
+else
+{
+    <h3 class="text-danger">Ova utakmica je vec odigrana</h3>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

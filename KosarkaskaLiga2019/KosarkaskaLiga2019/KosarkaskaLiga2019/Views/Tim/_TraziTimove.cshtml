@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Tim>
+@inject SignInManager<ApplicationUser> sm
+@inject UserManager<ApplicationUser> um
+@{ 
+     var korisnik = await um.GetUserAsync(User);
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                
+            </th>
+            <th>
+                Tim
+            </th>
+            <th>
+                Grad
+            </th>
+            <th>
+                Bodovi
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Tim t in Model)
+        {
+
+            <tr>
+                
+                <td>
+                    <img src="/Tim/CitajSliku/@t.TimId?" width="50" height="50" />
+                </td>
+                <td>
+                    @t.Naziv
+                </td>
+                <td>
+                    @t.Grad.NazivGrada
+                </td>
+                <td>
+                    @t.BrojBodova
+                </td>
+                <td>
+                    @if (sm.IsSignedIn(User) && korisnik.Email == "admin@gmail.com")
+                    {
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@t.TimId">Izmeni</a> <a class="btn btn-danger" asp-action ="Delete" asp-route-id = "@t.TimId" > Obris </a>
+}
+                    <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Details" asp-route-id="@t.TimId">Detalji</a>
+                </td>
+            </tr>
+            
+        }
+    </tbody>
+</table>

@@ -1,0 +1,63 @@
+﻿@model IEnumerable<KosarkaskaLiga2019.Models.Utakmica>
+@inject SignInManager<ApplicationUser> sm
+@inject UserManager<ApplicationUser> um
+@{
+    ViewData["Title"] = "Index";
+    var korisnik = await um.GetUserAsync(User);
+}
+
+<h1 style="font-family: 'Lobster', cursive;">Raspored utakmica</h1>
+@if (korisnik?.Email == "admin@gmail.com")
+	{
+<p>
+    <a asp-action="Create">Ubaci utakmicu</a>
+</p>
+	}
+
+<div class="container">
+    <div class="row">
+        @foreach (Utakmica u in Model)
+        {
+            @*<div class="col-md-12" style="background-color:lightgrey;">*@
+           
+            <div class="col-md-5 mb-2 pt-2 pb-2" style="text-align:center;background-color:#f5f5f5;border-bottom-left-radius:10px;border-top-left-radius:10px;">
+                <div class="row">
+                    <div class="col-md-4">
+                        <center><img src="/Tim/CitajSliku/@u.Domacin.TimId" style="height:50px" /></center>
+                    </div>
+                    <div class="col-md-8" style="text-align:center">
+                        <h5>@u.Domacin.Naziv</h5>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row" style="background-color:#f5f5f5; margin-bottom:8px;width:100px">
+                <div class="col-md-2 mb-2 pt-2 pb-2" style="text-align:center;background-color:#f5f5f5">
+                    @if (u.Rezultat == null && korisnik?.Email == "admin@gmail.com")
+                    {
+                        <a asp-action="Edit" asp-route-id="@u.UtakmicaId" class="badge badge-danger">Ubaci</a>
+                    }
+                    else
+                    {
+                        @u.Rezultat
+                    }
+
+
+
+                </div>
+            </div>
+            <div class="col-md-5 mb-2 pt-2 pb-2" style="text-align:center;background-color:#f5f5f5;border-bottom-right-radius:10px;border-top-right-radius:10px;">
+                <div class="row">
+
+                    <div class="col-md-8" style="text-align:center">
+                        <h5>@u.Gost.Naziv</h5>
+                    </div>
+                    <div class="col-md-4">
+                        <center><img src="/Tim/CitajSliku/@u.Gost.TimId" style="height:50px" /></center>
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

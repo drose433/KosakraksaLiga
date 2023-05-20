@@ -1,0 +1,86 @@
+﻿@model KosarkaskaLiga2019.Models.Tim
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 style="font-family: 'Lobster', cursive;">Napravi tim</h1>
+
+<h4>Tim</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label for="File1"></label>
+                <input id="File1" type="file" name="odabranaSlika" accept=".jpg, .gif, .png" onchange="PrikaziSliku()" />
+            </div>
+            <div class="form-group">
+                <img id="img1" src="" width="200" height="150" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Naziv" class="control-label"></label>
+                <input asp-for="Naziv" class="form-control" />
+                <span asp-validation-for="Naziv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GradId" class="control-label">Grad</label>
+                <select asp-for="GradId" class="form-control" asp-items="ViewBag.GradId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="BrojBodova" class="control-label">Broj bodova</label>
+                <input asp-for="BrojBodova" class="form-control" value="0"/>
+                <span asp-validation-for="BrojBodova" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" onclick="return Validacija()"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Index">Nazad na tabelu</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+<script>
+
+    function PrikaziSliku() {
+        var File1 = document.getElementById("File1");
+        var img1 = document.getElementById("img1");
+
+        var fajl = File1.files[0];
+
+        if (fajl != null && fajl.type.match(/image.*/)) {
+
+            var reader = new FileReader();
+            reader.readAsDataURL(fajl);
+
+            reader.onload = function () {
+
+                img1.src = reader.result;
+            };
+
+        }
+        else {
+            img1.src = "";
+        }
+    }
+
+    function Validacija() {
+
+        var src1 = $("#img1").attr("src");
+
+        if (src1 == "") {
+            $("#p1").html("Odaberi sliku");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+</script>
+}

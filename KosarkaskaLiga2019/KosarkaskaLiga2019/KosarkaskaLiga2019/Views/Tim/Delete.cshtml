@@ -1,0 +1,40 @@
+﻿@model KosarkaskaLiga2019.Models.Tim
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1 style="font-family: 'Lobster', cursive;">Izbrisi</h1>
+
+<h3>Da li zaista zelite da obrisete ovaj tim?</h3>
+<div>
+    <hr />
+    <img src="/Tim/CitajSliku/@Model.TimId" style="height:200px" />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Naziv
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Naziv
+        </dd>
+
+        <dt class="col-sm-2">
+            BrojBodova
+        </dt>
+        <dd class="col-sm-10">
+            @Model.BrojBodova
+        </dd>
+        <dt class="col-sm-2">
+            Grad
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Grad.NazivGrada
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="TimId" />
+        <input type="submit" value="Obrisi" class="btn btn-danger" />
+        <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Index">Vrati se na tabelu</a>
+    </form>
+</div>

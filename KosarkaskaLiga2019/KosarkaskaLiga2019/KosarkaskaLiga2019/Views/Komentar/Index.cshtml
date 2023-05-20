@@ -1,0 +1,27 @@
+﻿@model IEnumerable<KosarkaskaLiga2019.Models.Komentar>
+
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+<h1 class="mb-5" style="font-family: 'Lobster', cursive;">Komentari korisnika</h1>
+
+<p>
+    <a class="btn btn-secondary" asp-action="Create"><i class="fas fa-edit"></i> Ostavi komentar</a>
+</p>
+@foreach (Komentar k in Model)
+{
+<div class="row mb-5">
+    <div class="col-md-8"><h2 class="font-weight-bolder">@k.Autor</h2></div>
+    <div class="col-md-8 ml-3" style="font-size:20px;">@k.Komentar1</div>
+    @if (um.GetUserName(User) == k.Autor || um.GetUserName(User) == "admin@gmail.com")
+    {
+        <div class="col-md-8 mt-4">
+            <a class="badge badge-primary" asp-action="Edit" asp-route-id="@k.Id">Izmeni</a> |
+            <a class="badge badge-warning" asp-action="Details" asp-route-id="@k.Id">Detalji</a> |
+            <a class="badge badge-danger" asp-action="Delete" asp-route-id="@k.Id">Obrisi</a>
+        </div>
+    }
+</div>
+}

@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css?family=Itim&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Lobster&display=swap');
+#prva {
+    margin-left: 41.3px;
+}
+@media only screen and (max-width: 600px) {
+#prva {
+margin-left: 0px;
+}
+}
+.poz {
+    /*background-color:gray;*/
+    /*opacity:0.8;*/
+    width:100%;
+    height:100%;
+    color:pink;
+    padding:0px;
+}
+.tekst {
+    background-image: linear-gradient(to right,#532b67,#532b67,#b250b7);
+    width: 100%;
+    padding: 10px;
+    padding-left: 20px;
+    color: pink;
+    font-family: 'Pacifico';
+}
+.poz h1,p{
+    opacity:1;
+}
+.grad{
+    width:100%;
+}
+.klik:hover{
+    cursor:pointer;
+}
+pozadina {
+    background-color:#532b67;
+    color:white;
+}

@@ -1,0 +1,44 @@
+﻿@model KosarkaskaLiga2019.Models.Komentar
+
+@{
+    ViewData["Title"] = "Delete";
+}
+@if (um.GetUserId(User) == Model.ClanId || um.GetUserName(User) == "admin@gmail.com")
+{
+    <h1 style="font-family: 'Lobster', cursive;">Obrisi komentar</h1>
+
+<h3>Da li ste sigurni da zelite da obrisete ovaj komentar?</h3>
+<div>
+    <h4>Komentar</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            ClanId
+        </dt>
+        <dd class="col-sm-10">
+            @Model.ClanId
+        </dd>
+        <dt class="col-sm-2">
+            Komentar
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Komentar1
+        </dd>
+        <dt class="col-sm-2">
+            Autor
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Autor
+        </dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Index">Nazad na komentare</a>
+    </form>
+</div>
+}else
+	{
+<h2 class="text-danger">Ne mozete menajti komentar koji niste napisali.</h2>
+	}

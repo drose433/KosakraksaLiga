@@ -1,0 +1,49 @@
+﻿@model KosarkaskaLiga2019.Models.Komentar
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 style="font-family: 'Lobster', cursive;">Izmeni</h1>
+
+<h4>Komentar</h4>
+<hr />
+@if (um.GetUserId(User) == Model.ClanId || um.GetUserName(User) == "admin@gmail.com" )
+{
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <div class="form-group">
+                    <label asp-for="ClanId" class="control-label"></label>
+                    <input asp-for="ClanId" class="form-control" />
+                    <span asp-validation-for="ClanId" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Komentar1" class="control-label"></label>
+                    <input asp-for="Komentar1" class="form-control" />
+                    <span asp-validation-for="Komentar1" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Autor" class="control-label"></label>
+                    <input asp-for="Autor" class="form-control" />
+                    <span asp-validation-for="Autor" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+}
+else
+{
+    <h2 class="text-danger">Ne mozete menajti komentar koji niste napisali.</h2>
+}
+
+<div>
+    <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Index">Nazad na komentare</a>
+</div>
+

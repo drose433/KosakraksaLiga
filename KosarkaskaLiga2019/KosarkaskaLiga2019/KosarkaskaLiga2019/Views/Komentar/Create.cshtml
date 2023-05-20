@@ -1,0 +1,33 @@
+﻿@model KosarkaskaLiga2019.Models.Komentar
+
+@{
+    ViewData["Title"] = "Create";
+    var korisnik = await um.GetUserAsync(User);
+}
+
+<h1 style="font-family: 'Lobster', cursive;">Napisi komentar</h1>
+
+<h4>Komentar</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ClanId" class="form-control" value="@korisnik.Id" />
+            <input type="hidden" asp-for="Autor" class="form-control" value="@korisnik.Email" />
+            <div class="form-group">
+                <label asp-for="Komentar1" class="control-label">Mesto za komentar</label>
+                <textarea asp-for="Komentar1" class="form-control"></textarea>
+                <span asp-validation-for="Komentar1" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kreiraj" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a class="btn btn-primary" style="background-color:#b250b7;" asp-action="Index">Nazad na komentare</a>
+</div>
+
